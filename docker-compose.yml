@@ -1,0 +1,27 @@
+version: '3.1'  
+services:  
+  mautic:  
+    image: mautic/mautic  
+    ports:  
+      - '8080:80'  
+    environment:  
+      MAUTIC_DB_HOST: db  
+      MAUTIC_DB_USER: mautic  
+      MAUTIC_DB_PASSWORD: mautic_pass  
+      MAUTIC_DB_NAME: mautic  
+    volumes:  
+      - mautic_data:/var/www/html  
+  db:  
+    image: mysql:5.7  
+    ports:  
+      - '3306:3306'  
+    environment:  
+      MYSQL_ROOT_PASSWORD: root_pass  
+      MYSQL_DATABASE: mautic  
+      MYSQL_USER: mautic  
+      MYSQL_PASSWORD: mautic_pass  
+    volumes:  
+      - db_data:/var/lib/mysql  
+volumes:  
+  mautic_data:  
+  db_data:  
